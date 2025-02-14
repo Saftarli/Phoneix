@@ -30,7 +30,7 @@ MESSAGE_TAGS = {
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a1&lb)^e!pip*fe3em)%r5ojz81oi%5nqa8mzs3e2!$t!$q26#'
+secret = config('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 debug = config( 'DEBUG', cast= bool)
@@ -97,10 +97,10 @@ else:
         DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'project_db_pro',       # Verilənlər bazasının adı
-            'USER': 'project_db_user',   # PostgreSQL istifadəçi adı
-            'PASSWORD': 'O89J@n^mRb!$m^vQ&@7t{]*nYs',  # PostgreSQL şifrəsi (Dəyişin!)
-            'HOST': 'localhost',   # PostgreSQL serveri (Əgər uzaqdan qoşulursunuzsa, IP adres yazın)
+            'NAME': config('DB_NAME'),       # Verilənlər bazasının adı
+            'USER': config('DB_USER'),   # PostgreSQL istifadəçi adı
+            'PASSWORD': config('DB_PASS'),  # PostgreSQL şifrəsi (Dəyişin!)
+            'HOST': config('DB_LOCAL'),   # PostgreSQL serveri (Əgər uzaqdan qoşulursunuzsa, IP adres yazın)
             'PORT': '',            # Standart port (5432) üçün boş buraxıla bilər
         }
     }
@@ -137,11 +137,17 @@ USE_TZ = True
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
 
+DJANGORESIZED_DEFAULT_SIZE = [500, 500]
+DJANGORESIZED_DEFAULT_QUALITY = 75
+DJANGORESIZED_DEFAULT_KEEP_META = True
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'PNG': ".png"}
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
